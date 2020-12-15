@@ -51,8 +51,7 @@
 
         <tr>
             <td>
-                <a th:href="@{/student/{id}(id=${student.getId()})}"
-                   th:text="${student.getFullName()}">fio</a>
+                <a th:text="${student.getFullName()}">fio</a>
             </td>
 
             <td th:text="${student.getNumberGroup()}">number group</td>

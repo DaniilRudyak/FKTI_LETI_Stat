@@ -8,7 +8,7 @@ public class ConfigConnection {
 
     private static final String URL = "jdbc:postgresql://localhost:5432/FKTI_db";
     private static final String USERNAME = "postgres";
-    private static final String PASSWORD = "12344321";
+    private static final String PASSWORD = "postgres";
 
     public static Connection connection;
 
