@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New person</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/fkti/groups/list/students/{id}(id=${id})}" th:object="${student}">
+
+    <label for="fullName">Enter full name student: </label>
+    <input type="text" th:field="*{fullName}" id="fullName"/>
+
+    <br/>
+
+    <label for="numberStudentCard">Enter number student card group: </label>
+    <input type="text" th:field="*{numberStudentCard}" id="numberStudentCard"/>
+
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

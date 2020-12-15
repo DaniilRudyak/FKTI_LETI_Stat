@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update person</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${courseInfo.getNameCourse()},year=${courseInfo.getYearOfCertification()})}" th:object="${courseInfo}">
+
+    <label for="nameStudent">Enter name student: </label>
+    <input type="text" th:field="*{nameStudent}" id="nameStudent"/>
+    <br/>
+
+    <label for="numberGroup">Enter Number Group: </label>
+    <input type="text" th:field="*{numberGroup}" id="numberGroup"/>
+    <br/>
+
+    <label for="nameTeacher">Enter nameTeacher: </label>
+    <input type="text" th:field="*{nameTeacher}" id="nameTeacher"/>
+    <br/>
+
+    <label for="nameCourse">Enter nameCourse: </label>
+    <input type="text" th:field="*{nameCourse}" id="nameCourse"/>
+    <br/>
+
+    <label for="yearOfCertification">Enter yearOfCertification: </label>
+    <input type="text" th:field="*{yearOfCertification}" id="yearOfCertification"/>
+    <br/>
+
+    <label for="numberStudentCard">Enter numberStudentCard: </label>
+    <input type="text" th:field="*{numberStudentCard}" id="numberStudentCard"/>
+    <br/>
+
+    <label for="mark">Enter mark: </label>
+    <input type="text" th:field="*{mark}" id="mark"/>
+<br/>
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

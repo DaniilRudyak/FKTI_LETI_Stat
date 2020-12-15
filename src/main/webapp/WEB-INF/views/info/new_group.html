@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New group</title>
+</head>
+<body>
+
+<style>
+    {
+        box-sizing:border-box;
+    }
+    body {
+        margin:20px;
+        background-color: #fafafa;
+    }
+    textarea {
+        width:100%;
+        resize: vertical;
+        padding:15px;
+        border-radius:15px;
+        border:0;
+        box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+        height:150px;
+    }
+</style>
+
+<form th:method="POST" th:action="@{/fkti/groups}" th:object="${group}">
+    <label for="numberGroup">Enter number group: </label>
+    <input type="text" th:field="*{numberGroup}" id="numbergroup"/>
+
+    <br/>
+
+    <label for="begStud">Enter begin study: </label>
+    <input type="text" th:field="*{begStud}" id="begstud"/>
+
+    <br/>
+
+    <label for="endStud">Enter end study: </label>
+    <input type="text" th:field="*{endStud}" id="endstud"/>
+
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

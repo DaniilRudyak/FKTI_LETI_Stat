@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Группы ФКТИ</title>
+</head>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table td {
+        height: 30px;
+        vertical-align: top;
+    }
+
+    /* выравнивание по верхней границе ячейки */
+    table td {
+        height: 30px;
+        vertical-align: bottom;
+    }
+
+    /* выравнивание по нижней границе ячейки */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+</style>
+
+<body>
+<table>
+    <tr>
+        <th>Number group</th>
+        <th>Years of study</th>
+        <th>List students in group</th>
+        <th>List course in group</th>
+        <th>Delete</th>
+    </tr>
+    <div th:each="group : ${groups}">
+        <tr>
+            <td><a th:text="${group.getNumberGroup()}">number group</a></td>
+            <td><a th:text="${group.getBegStud() + '-' + group.getEndStud()}">number group</a></td>
+            <td><a th:href="@{/fkti/groups/list/students/{id}(id=${group.getId()})}" th:text="View">list students</a></td>
+            <td><a th:href="@{/fkti/groups/list/course/{id}(id=${group.getId()})}" th:text="View">list course</a></td>
+            <td><form th:method="DELETE" th:action="@{/fkti/groups/{id}(id=${group.getId()})}"><input type="submit" value="Delete"/></form></td>
+        </tr>
+    </div>
+</table>
+<br/>
+<hr/>
+
+<a href="/fkti/groups/new">Create new group</a>
+
+
+</body>
+</html>

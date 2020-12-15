@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Group FKTI</title>
+</head>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table td {
+        height: 30px;
+        vertical-align: top;
+    }
+
+    /* выравнивание по верхней границе ячейки */
+    table td {
+        height: 30px;
+        vertical-align: bottom;
+    }
+
+    /* выравнивание по нижней границе ячейки */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+</style>
+
+<body>
+<table>
+    <tr>
+        <th>FIO</th>
+        <th>Number group</th>
+        <th>Name course</th>
+        <th>Year of certification</th>
+        <th>Name teacher</th>
+        <th>mark</th>
+        <th>Change marks</th>
+    </tr>
+    <div th:each="mark : ${marks}">
+        <tr>
+            <td><a th:text="${mark.getNameStudent()}">FIO</a></td>
+            <td><a th:text="${mark.getNumberGroup()}">number group</a></td>
+            <td><a th:text="${mark.getNameCourse()}">name course</a></td>
+            <td><a th:text="${mark.getYearOfCertification()}"> year Of Certification</a></td>
+            <td><a th:text="${mark.getNameTeacher()}">name teacher</a></td>
+            <td><a th:text="${mark.getMark()}">mark</a></td>
+            <td><a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/edit/{number}(id=${id},course=${mark.getNameCourse()},year=${mark.getYearOfCertification()},number=${mark.getNumberStudentCard()})}">Edit</a></td>
+        </tr>
+    </div>
+</table>
+<br/>
+<hr/>
+
+<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download(id=${id},course=${course},year=${year})}">Download list in csv format file</a>
+<br/>
+
+<h3><a th:href="@{/fkti/groups}"> General page </a></h3>
+<h3><a th:href="@{/fkti/groups/list/course/{id}(id=${id})}"> Back </a></h3>
+</body>
+</html>

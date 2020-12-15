@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List group</title>
+</head>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table td, table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table td {
+        height: 30px;
+        vertical-align: top;
+    }
+
+    /* выравнивание по верхней границе ячейки */
+    table td {
+        height: 30px;
+        vertical-align: bottom;
+    }
+
+    /* выравнивание по нижней границе ячейки */
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+    }
+</style>
+<body>
+
+<table>
+    <tr>
+        <th>FIO</th>
+        <th>Number group</th>
+        <th>Year of study</th>
+        <th>Number student card</th>
+        <th>Delete</th>
+    </tr>
+    <div th:each="student : ${students}">
+
+
+        <tr>
+            <td>
+                <a th:href="@{/student/{id}(id=${student.getId()})}"
+                   th:text="${student.getFullName()}">fio</a>
+            </td>
+
+            <td th:text="${student.getNumberGroup()}">number group</td>
+
+            <td th:text="${student.getBegStud() + '-' + student.getEndStud()}">begin study</td>
+
+            <td th:text="${student.getNumberStudentCard()}">Number student card</td>
+
+            <td><form th:method="DELETE" th:action="@{/fkti/groups/list/students/{id}/{number}(id=${id},number=${student.getNumberStudentCard()})}"><input type="submit" value="Delete"/></form></td>
+
+        </tr>
+
+
+    </div>
+</table>
+<br/>
+<hr/>
+
+
+<a th:href="@{/fkti/groups/list/students/{id}/new(id=${id})}">Create new students</a>
+<br/>
+
+<a th:href="@{/fkti/groups}"> General page </a>
+
+</body>
+</html>

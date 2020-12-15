@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update person</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download/csv(id=${id},course=${course},year=${year})}" th:object="${path}">
+
+    <label for="path">Enter path for download file: </label>
+    <input type="text" th:field="*{path}" id="path"/>
+    <br/>
+
+
+    <input type="submit" value="Download!"/>
+</form>
+
+</body>
+</html>
