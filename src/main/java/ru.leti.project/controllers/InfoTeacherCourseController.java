@@ -28,7 +28,7 @@ public class InfoTeacherCourseController {
 
     // @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {//
-       // model.addAttribute("person", infoTeacheCourseDAO.show(id));
+        // model.addAttribute("person", infoTeacheCourseDAO.show(id));
         return "people/show";
     }
 
@@ -44,13 +44,13 @@ public class InfoTeacherCourseController {
         //if (bindingResult.hasErrors())
         //  return "fkti/groups/new";
 
-        infoTeacherCourseDAO.save(teacher,id);
+        infoTeacherCourseDAO.save(teacher, id);
         return "redirect:/fkti/groups/list/course/{id}";
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        infoTeacherCourseDAO.delete(id);
+    @DeleteMapping("/{id}/{course}/{year}")
+    public String delete(@PathVariable("id") int id, @PathVariable("course") String course, @PathVariable("year") int year) {
+        infoTeacherCourseDAO.delete(id, course, year);
         return "redirect:/fkti/groups/list/course/{id}";
     }
 }

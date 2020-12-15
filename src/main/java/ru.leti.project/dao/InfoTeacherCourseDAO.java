@@ -98,37 +98,32 @@ public class InfoTeacherCourseDAO {
     }
 
 
-    public void delete(int id) {// ДОБАВИТЬ ПРОВЕРКУ НА ТО ЧТО А ЕСТЬ ЛИ ДАННЫЕ В ТАБЛИЦЕ ВООБЩЕ ПРИ УДАЛЕНИИ!!!!!!!!!!!
+    public void delete(int id, String course, int year) {
 
 
         try {
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM enum_of_groups WHERE id=?");
-            PreparedStatement preparedStatement2 = connection.prepareStatement("DELETE FROM enum_of_groups WHERE id=?");
-            PreparedStatement preparedStatement3 = connection.prepareStatement("DELETE FROM grade_sheet WHERE number_group = ? AND year_of_certification >= ? AND year_of_certification <= ?");
-            PreparedStatement preparedStatement4 = connection.prepareStatement("DELETE FROM list_all_student WHERE number_group = ? AND beg_stud = ? AND end_stud = ?");
-            PreparedStatement preparedStatement5 = connection.prepareStatement("DELETE FROM list_all_teacher WHERE teaching_group_number = ? AND year_of_study >= ? AND year_of_study <= ?");
+
+            PreparedStatement preparedStatement2 = connection.prepareStatement("DELETE FROM grade_sheet WHERE number_group = ? AND course = ? AND year_of_certification = ?");
+
+            PreparedStatement preparedStatement3 = connection.prepareStatement("DELETE FROM list_all_teacher WHERE teaching_group_number = ? AND course = ? AND year_of_study = ?");
 
             preparedStatement1.setInt(1, id);
             ResultSet resultSet = preparedStatement1.executeQuery();
             resultSet.next();
 
-            preparedStatement5.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement5.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement5.setInt(3, resultSet.getInt("end_stud"));
-            preparedStatement5.executeUpdate();
+            preparedStatement2.setInt(1, resultSet.getInt("number_group"));
+            preparedStatement2.setString(2, course);
+            preparedStatement2.setInt(3, year);
 
-            preparedStatement4.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement4.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement4.setInt(3, resultSet.getInt("end_stud"));
-            preparedStatement4.executeUpdate();
+            preparedStatement2.executeUpdate();
+
 
             preparedStatement3.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement3.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement3.setInt(3, resultSet.getInt("end_stud"));
-            preparedStatement3.executeUpdate();
 
-            preparedStatement2.setInt(1, id);
-            preparedStatement2.executeUpdate();
+            preparedStatement3.setString(2, course);
+            preparedStatement3.setInt(3, year);
+            preparedStatement3.executeUpdate();
 
 
         } catch (SQLException throwables) {

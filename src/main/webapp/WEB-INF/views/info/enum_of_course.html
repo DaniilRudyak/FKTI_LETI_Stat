@@ -50,7 +50,7 @@
         <tr>
             <td><a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}" th:text="${teacher.getNameCourse()}">name course</a></td>
             <td><a th:text="${teacher.getYearsStudy()}">name course</a></td>
-            <td><form th:method="DELETE" th:action="@{/fkti/groups/list/course/mark/{id}(id=${teacher.getId()})}"><input type="submit" value="Delete"/></form></td>
+            <td><form th:method="DELETE" th:action="@{/fkti/groups/list/course/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}"><input type="submit" value="Delete"/></form></td>
         </tr>
     </div>
 </table>
