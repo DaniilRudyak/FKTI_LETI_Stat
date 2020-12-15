@@ -15,7 +15,7 @@ public class Teacher {
     private String fullName;
 
     @Size(min = 1, message = "Number of group can't be less than 4 characters")
-    private int nunberInGroupCourse;
+    private int numberInGroupCourse;
 
     @NotEmpty(message = "Name course should not be empty")
     @Size(min = 3, max = 20, message = "Name course should be between 3 and 20 characters")

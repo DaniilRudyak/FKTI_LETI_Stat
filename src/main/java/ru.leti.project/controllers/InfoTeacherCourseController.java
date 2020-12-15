@@ -26,12 +26,6 @@ public class InfoTeacherCourseController {
         return "info/enum_of_course";
     }
 
-    // @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {//
-        // model.addAttribute("person", infoTeacheCourseDAO.show(id));
-        return "people/show";
-    }
-
 
     @GetMapping("/{id}/new")
     public String newTeacher(@ModelAttribute("teacher") Teacher teacher, @PathVariable("id") int id, Model model) {
@@ -44,8 +38,10 @@ public class InfoTeacherCourseController {
         //if (bindingResult.hasErrors())
         //  return "fkti/groups/new";
 
-        infoTeacherCourseDAO.save(teacher, id);
-        return "redirect:/fkti/groups/list/course/{id}";
+        if (infoTeacherCourseDAO.save(teacher, id) == 1)
+            return "error/error_new_course";
+        else
+            return "redirect:/fkti/groups/list/course/{id}";
     }
 
     @DeleteMapping("/{id}/{course}/{year}")

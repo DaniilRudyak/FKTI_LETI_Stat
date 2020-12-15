@@ -38,7 +38,7 @@ public class InfoTeacherCourseDAO {
 
                 teacher.setId(resultSet1.getInt("id"));
                 teacher.setFullName(resultSet1.getString("fullname"));
-                teacher.setNunberInGroupCourse(resultSet1.getInt("teaching_group_number"));
+                teacher.setNumberInGroupCourse(resultSet1.getInt("teaching_group_number"));
                 teacher.setNameCourse(resultSet1.getString("course"));
                 teacher.setYearsStudy(resultSet1.getInt("year_of_study"));
 
@@ -54,17 +54,31 @@ public class InfoTeacherCourseDAO {
     }
 
 
-    public void save(Teacher teacher, int id) {
+    public int save(Teacher teacher, int id) {
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT number_group FROM enum_of_groups WHERE id = " + id;
+            String SQL = "SELECT * FROM enum_of_groups WHERE id = " + id;
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
-            teacher.setNunberInGroupCourse(resultSet.getInt("number_group"));
+            PreparedStatement checkPreparedStatement =
+                    connection.prepareStatement("SELECT * FROM list_all_teacher WHERE fullname = ? AND teaching_group_number = ? AND course = ? AND year_of_study = ?");
+            checkPreparedStatement.setString(1, teacher.getFullName());
+            checkPreparedStatement.setInt(2, resultSet.getInt("number_group"));
+            checkPreparedStatement.setString(3, teacher.getNameCourse());
+            checkPreparedStatement.setInt(4, teacher.getYearsStudy());
+            ResultSet checkResultSet = checkPreparedStatement.executeQuery();
+
+            if(checkResultSet.next()
+                    ||(!(teacher.getYearsStudy()>=resultSet.getInt("beg_stud")&&teacher.getYearsStudy()<=resultSet.getInt("end_stud"))))//данный курс уже присутствует
+                return 1;
+
+
+
+            teacher.setNumberInGroupCourse(resultSet.getInt("number_group"));
             PreparedStatement preparedStatement =
                     connection.prepareStatement("INSERT INTO list_all_teacher(fullname, teaching_group_number, course , year_of_study) VALUES(?, ?, ?, ?)");
 
-            String SQL1 = "SELECT * FROM list_all_student WHERE number_group = " + teacher.getNunberInGroupCourse()
+            String SQL1 = "SELECT * FROM list_all_student WHERE number_group = " + teacher.getNumberInGroupCourse()
                     + " AND beg_stud <= " + teacher.getYearsStudy()
                     + " AND end_stud >= " + teacher.getYearsStudy();
             Statement statement1 = connection.createStatement();
@@ -85,7 +99,7 @@ public class InfoTeacherCourseDAO {
 
 
             preparedStatement.setString(1, teacher.getFullName());
-            preparedStatement.setInt(2, teacher.getNunberInGroupCourse());
+            preparedStatement.setInt(2, teacher.getNumberInGroupCourse());
             preparedStatement.setString(3, teacher.getNameCourse());
             preparedStatement.setInt(4, teacher.getYearsStudy());
 
@@ -95,6 +109,7 @@ public class InfoTeacherCourseDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return 0;
     }
 
 
