@@ -97,15 +97,28 @@ public class InfoStudDAO {
 
     }
 
-    public void save(Student student, int id) {
+    public int save(Student student, int id) {
         try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO list_all_student(fullname, number_group, number_student_card , beg_stud, end_stud) VALUES(?, ?, ?, ?, ?)");
-
             String SQL = "SELECT * FROM enum_of_groups WHERE id = " + id;
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
+
+            PreparedStatement checkPreparedStatement =
+                    connection.prepareStatement("SELECT * FROM list_all_student WHERE number_group = ? AND number_student_card = ? AND beg_stud = ? AND end_stud = ?");
+
+            checkPreparedStatement.setInt(1, resultSet.getInt("number_group"));
+            checkPreparedStatement.setInt(2, student.getNumberStudentCard());
+            checkPreparedStatement.setInt(3, resultSet.getInt("beg_stud"));
+            checkPreparedStatement.setInt(4, resultSet.getInt("end_stud"));
+            ResultSet checkResultSet = checkPreparedStatement.executeQuery();
+            if(checkResultSet.next())
+                return 1;
+
+
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("INSERT INTO list_all_student(fullname, number_group, number_student_card , beg_stud, end_stud) VALUES(?, ?, ?, ?, ?)");
+
 
             preparedStatement.setString(1, student.getFullName());
             preparedStatement.setInt(2, resultSet.getInt("number_group"));
@@ -137,6 +150,7 @@ public class InfoStudDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return 0;
     }
 
 }

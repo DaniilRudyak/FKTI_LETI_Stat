@@ -39,13 +39,13 @@ public class InfoStudController {
     @PostMapping("/{id}")
     public String createStudent(@ModelAttribute("student") Student student, BindingResult bindingResult, @PathVariable("id") int id) {
         //if (bindingResult.hasErrors())
-          //  return "fkti/groups/new";
+        //  return "fkti/groups/new";
 
-        infoStudDAO.save(student,id);
-        return "redirect:/fkti/groups/list/students/{id}";
+        if (infoStudDAO.save(student, id) == 1)
+            return "error/error_new_student";
+        else
+            return "redirect:/fkti/groups/list/students/{id}";
     }
-
-
 
 
     @DeleteMapping("/{id}/{number}")
