@@ -42,7 +42,6 @@ public class InfoStudGroupDAO {
     }
 
 
-
     public void save(Group group) {
         try {
             PreparedStatement preparedStatement =
@@ -58,7 +57,6 @@ public class InfoStudGroupDAO {
             throwables.printStackTrace();
         }
     }
-
 
 
     public void delete(int id) {// ДОБАВИТЬ ПРОВЕРКУ НА ТО ЧТО А ЕСТЬ ЛИ ДАННЫЕ В ТАБЛИЦЕ ВООБЩЕ ПРИ УДАЛЕНИИ!!!!!!!!!!!

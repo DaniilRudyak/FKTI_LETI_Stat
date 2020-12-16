@@ -57,14 +57,17 @@
             <td><a th:text="${mark.getYearOfCertification()}"> year Of Certification</a></td>
             <td><a th:text="${mark.getNameTeacher()}">name teacher</a></td>
             <td><a th:text="${mark.getMark()}">mark</a></td>
-            <td><a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/edit/{number}(id=${id},course=${mark.getNameCourse()},year=${mark.getYearOfCertification()},number=${mark.getNumberStudentCard()})}">Edit</a></td>
+            <td>
+                <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/edit/{number}(id=${id},course=${mark.getNameCourse()},year=${mark.getYearOfCertification()},number=${mark.getNumberStudentCard()})}">Edit</a>
+            </td>
         </tr>
     </div>
 </table>
 <br/>
 <hr/>
 
-<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download(id=${id},course=${course},year=${year})}">Download list in csv format file</a>
+<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download(id=${id},course=${course},year=${year})}">Download
+    list in csv format file</a>
 <br/>
 
 <h3><a th:href="@{/fkti/groups}"> General page </a></h3>

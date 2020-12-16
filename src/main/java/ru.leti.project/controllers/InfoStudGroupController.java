@@ -29,16 +29,14 @@ public class InfoStudGroupController {
     }
 
 
-
-
     @GetMapping("/new")
     public String newGroup(@ModelAttribute("group") Group group) {
         return "info/new_group";
     }
 
     @PostMapping()
-    public String createGroup(@ModelAttribute("group")  Group group,
-                         BindingResult bindingResult) {
+    public String createGroup(@ModelAttribute("group") Group group,
+                              BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "fkti/groups/new";
 

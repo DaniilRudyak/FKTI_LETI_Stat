@@ -112,7 +112,7 @@ public class InfoStudDAO {
             checkPreparedStatement.setInt(3, resultSet.getInt("beg_stud"));
             checkPreparedStatement.setInt(4, resultSet.getInt("end_stud"));
             ResultSet checkResultSet = checkPreparedStatement.executeQuery();
-            if(checkResultSet.next())
+            if (checkResultSet.next())
                 return 1;
 
 

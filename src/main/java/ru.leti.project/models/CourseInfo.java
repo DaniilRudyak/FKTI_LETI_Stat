@@ -27,7 +27,7 @@ public class CourseInfo {
     }
 
 
-    public CourseInfo(int id, String nameStudent, int numberGroup, String nameTeacher, String nameCourse,int yearOfCertification, int numberStudentCard, int mark) {
+    public CourseInfo(int id, String nameStudent, int numberGroup, String nameTeacher, String nameCourse, int yearOfCertification, int numberStudentCard, int mark) {
         this.id = id;
         this.nameStudent = nameStudent;
         this.numberGroup = numberGroup;

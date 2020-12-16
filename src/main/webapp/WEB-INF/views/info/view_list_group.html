@@ -60,7 +60,11 @@
 
             <td th:text="${student.getNumberStudentCard()}">Number student card</td>
 
-            <td><form th:method="DELETE" th:action="@{/fkti/groups/list/students/{id}/{number}(id=${id},number=${student.getNumberStudentCard()})}"><input type="submit" value="Delete"/></form></td>
+            <td>
+                <form th:method="DELETE"
+                      th:action="@{/fkti/groups/list/students/{id}/{number}(id=${id},number=${student.getNumberStudentCard()})}">
+                    <input type="submit" value="Delete"/></form>
+            </td>
 
         </tr>
 

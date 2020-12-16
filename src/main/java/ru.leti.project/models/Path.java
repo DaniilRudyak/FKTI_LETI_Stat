@@ -7,7 +7,7 @@ public class Path {
     private String path;
 
     public Path() {
-path = new String();
+        path = new String();
     }
 
     public Path(String path) {

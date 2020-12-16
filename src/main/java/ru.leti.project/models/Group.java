@@ -17,7 +17,7 @@ public class Group {
     public Group() {
     }
 
-    public Group( int numberGroup, int begStud, int endStud) {
+    public Group(int numberGroup, int begStud, int endStud) {
         this.numberGroup = numberGroup;
         this.begStud = begStud;
         this.endStud = endStud;

@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${courseInfo.getNameCourse()},year=${courseInfo.getYearOfCertification()})}" th:object="${courseInfo}">
+<form th:method="PATCH"
+      th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${courseInfo.getNameCourse()},year=${courseInfo.getYearOfCertification()})}"
+      th:object="${courseInfo}">
 
     <label for="nameStudent">Enter name student: </label>
     <input type="text" th:field="*{nameStudent}" id="nameStudent"/>
@@ -34,7 +36,7 @@
 
     <label for="mark">Enter mark: </label>
     <input type="text" th:field="*{mark}" id="mark"/>
-<br/>
+    <br/>
     <input type="submit" value="Update!"/>
 </form>
 <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${course},year=${year})}"> Back </a>

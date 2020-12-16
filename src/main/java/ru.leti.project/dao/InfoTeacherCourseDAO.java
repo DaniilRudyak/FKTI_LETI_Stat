@@ -61,15 +61,15 @@ public class InfoTeacherCourseDAO {
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
             PreparedStatement checkPreparedStatement =
-                    connection.prepareStatement("SELECT * FROM list_all_teacher WHERE fullname = ? AND teaching_group_number = ? AND course = ? AND year_of_study = ?");
-            checkPreparedStatement.setString(1, teacher.getFullName());
-            checkPreparedStatement.setInt(2, resultSet.getInt("number_group"));
-            checkPreparedStatement.setString(3, teacher.getNameCourse());
-            checkPreparedStatement.setInt(4, teacher.getYearsStudy());
+                    connection.prepareStatement("SELECT * FROM list_all_teacher WHERE teaching_group_number = ? AND course = ? AND year_of_study = ?");
+
+            checkPreparedStatement.setInt(1, resultSet.getInt("number_group"));
+            checkPreparedStatement.setString(2, teacher.getNameCourse());
+            checkPreparedStatement.setInt(3, teacher.getYearsStudy());
             ResultSet checkResultSet = checkPreparedStatement.executeQuery();
 
             if(checkResultSet.next()
-                    ||(!(teacher.getYearsStudy()>=resultSet.getInt("beg_stud")&&teacher.getYearsStudy()<=resultSet.getInt("end_stud"))))//данный курс уже присутствует
+                    ||(!(teacher.getYearsStudy()>=resultSet.getInt("beg_stud")&&teacher.getYearsStudy()<=resultSet.getInt("end_stud"))))//данный курс уже присутствует или год выставления за диапазоном обучения
                 return 1;
 
 

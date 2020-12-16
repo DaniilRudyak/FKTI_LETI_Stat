@@ -6,7 +6,9 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download/csv(id=${id},course=${course},year=${year})}" th:object="${path}">
+<form th:method="POST"
+      th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download/csv(id=${id},course=${course},year=${year})}"
+      th:object="${path}">
 
     <label for="path">Enter path for download file: </label>
     <input type="text" th:field="*{path}" id="path"/>
