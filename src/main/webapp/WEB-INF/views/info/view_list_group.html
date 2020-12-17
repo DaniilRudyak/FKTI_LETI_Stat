@@ -2,7 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List group</title>
+    <title>Students of group</title>
+    <style>
+        .button {
+            background-color: #dfdddf;
+            color: black;
+            padding: 4px 13px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius:6px;
+            border:thin black;
+        }
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position:  300px 260px ;
+            background-repeat: no-repeat;
+        }</style>
 </head>
 <style>
     table {
@@ -75,10 +95,10 @@
 <hr/>
 
 
-<a th:href="@{/fkti/groups/list/students/{id}/new(id=${id})}">Create new students</a>
+<a th:href="@{/fkti/groups/list/students/{id}/new(id=${id})}"class="button">Create new students</a>
 <br/>
 
-<a th:href="@{/fkti/groups}"> General page </a>
+<a th:href="@{/fkti/groups}"class="button"> General page </a>
 
 </body>
 </html>

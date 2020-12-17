@@ -3,8 +3,11 @@ package ru.leti.project.models;
 
 import lombok.Data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 
 @Data
 public class Student {
@@ -14,17 +17,18 @@ public class Student {
     @Size(min = 10, max = 40, message = "Full name should be between 10 and 40 characters")
     private String fullName;
 
-    @Size(min = 1, message = "Number of group should be only 4 characters")
+   // @Size(min = 1, message = "Number of group should be only 4 characters")
     private int numberGroup;
 
-    @Size(min = 1, message = "Number of group should be only 6 characters")
+    @Min(value = 100000,message = "Number of student card should be only 6 characters")
+    @Max(value = 999999,message = "Number of student card should be only 6 characters")
     private int numberStudentCard;
 
-    private int begStud;
+    private Date begStud;
 
-    private int endStud;
+    private Date endStud;
 
-    public Student(int id, String fullName, int numberGroup, int numberStudentCard, int begStud, int endStud) {
+    public Student(int id, String fullName, int numberGroup, int numberStudentCard, Date begStud, Date endStud) {
         this.id = id;
         this.fullName = fullName;
         this.numberGroup = numberGroup;

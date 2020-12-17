@@ -3,18 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>New group</title>
+    <style>
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position:  300px 260px ;
+            background-repeat: no-repeat;
+    }</style>
 </head>
 <body>
-
 <style>
+    .button {
+        background-color: #dfdddf;
+        color: black;
+        padding: 4px 13px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius:6px;
+        border:thin black;
+    }
     {
         box-sizing: border-box
     ;
     }
-    body {
-        margin: 20px;
-        background-color: #fafafa;
-    }
+
 
     textarea {
         width: 100%;
@@ -29,24 +45,22 @@
 
 <form th:method="POST" th:action="@{/fkti/groups}" th:object="${group}">
     <label for="numberGroup">Enter number group: </label>
-    <input type="text" th:field="*{numberGroup}" id="numbergroup"/>
-
+    <input type="text" th:field="*{numberGroup}" id="numberGroup"/>
+    <div style="color:red" th:if="${#fields.hasErrors('numberGroup')}" th:errors="*{numberGroup}"></div>
     <br/>
 
-    <label for="begStud">Enter begin study: </label>
-    <input type="text" th:field="*{begStud}" id="begstud"/>
-
+    <label for="begStud">Enter begin study date: </label>
+    <input type="date" th:field="*{begStud}" id="begStud"/>
     <br/>
 
-    <label for="endStud">Enter end study: </label>
-    <input type="text" th:field="*{endStud}" id="endstud"/>
-
+    <label for="endStud">Enter end study date: </label>
+    <input type="date" th:field="*{endStud}" id="endStud"/>
     <br/>
 
     <input type="submit" value="Create!"/>
 </form>
 
-<br/>
-<a th:href="@{/fkti/groups}"> Back </a>
+
+<a th:href="@{/fkti/groups}" class="button"> Back </a>
 </body>
 </html>

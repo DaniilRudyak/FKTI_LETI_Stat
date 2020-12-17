@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>EROR!!!</title>
+    <title>ERROR!!!</title>
 </head>
 <body>
-<h1>This course has already been created or the year of assessment is not included in the training range of the
-    group</h1>
+<h2 style="color: crimson"> This course has already been created or the year of assessment is not included in the training range of the
+    group</h2>
 
 <a th:href="@{/fkti/groups/list/course/{id}(id=${id})}">Try again</a>
 </body>

@@ -37,9 +37,9 @@ public class InfoStudController {
     }
 
     @PostMapping("/{id}")
-    public String createStudent(@ModelAttribute("student") Student student, BindingResult bindingResult, @PathVariable("id") int id) {
-        //if (bindingResult.hasErrors())
-        //  return "fkti/groups/new";
+    public String createStudent(@ModelAttribute("student") @Valid Student student, BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "info/new_student";
 
         if (infoStudDAO.save(student, id) == 1)
             return "error/error_new_student";

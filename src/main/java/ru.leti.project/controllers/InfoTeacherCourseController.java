@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.leti.project.dao.InfoTeacherCourseDAO;
 import ru.leti.project.models.Teacher;
 
+import javax.validation.Valid;
+import java.sql.Date;
+import java.util.GregorianCalendar;
+
 
 @Controller
 @RequestMapping(value = "/fkti/groups/list/course")
@@ -34,9 +38,9 @@ public class InfoTeacherCourseController {
     }
 
     @PostMapping("/{id}")
-    public String createTeacher(@ModelAttribute("teacher") Teacher teacher, BindingResult bindingResult, @PathVariable("id") int id) {
-        //if (bindingResult.hasErrors())
-        //  return "fkti/groups/new";
+    public String createTeacher(@ModelAttribute("teacher")@Valid Teacher teacher, BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "info/new_course";
 
         if (infoTeacherCourseDAO.save(teacher, id) == 1)
             return "error/error_new_course";
@@ -45,7 +49,7 @@ public class InfoTeacherCourseController {
     }
 
     @DeleteMapping("/{id}/{course}/{year}")
-    public String delete(@PathVariable("id") int id, @PathVariable("course") String course, @PathVariable("year") int year) {
+    public String delete(@PathVariable("id") int id, @PathVariable("course") String course, @PathVariable("year") Date year) {
         infoTeacherCourseDAO.delete(id, course, year);
         return "redirect:/fkti/groups/list/course/{id}";
     }

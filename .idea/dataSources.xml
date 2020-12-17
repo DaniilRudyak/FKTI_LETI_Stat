@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="FKTI_db@localhost" uuid="e15b0310-d290-43cd-9c69-6b3ddebe50c7">
+    <data-source source="LOCAL" name="FKTI_db@localhost" uuid="9ac8cc65-f6e2-4c3a-af98-69ea62b9e5b6">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
+      <jdbc-url>jdbc:postgresql://localhost:5432/FKTI_db</jdbc-url>
     </data-source>
   </component>
 </project>

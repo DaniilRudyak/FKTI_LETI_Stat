@@ -28,8 +28,8 @@ public class InfoStudDAO {
             PreparedStatement preparedStatement1 = connection.prepareStatement("SELECT * FROM list_all_student WHERE number_group = ? AND beg_stud = ? AND end_stud = ?");
 
             preparedStatement1.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement1.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement1.setInt(3, resultSet.getInt("end_stud"));
+            preparedStatement1.setDate(2, resultSet.getDate("beg_stud"));
+            preparedStatement1.setDate(3, resultSet.getDate("end_stud"));
             ;
             ResultSet resultSet1 = preparedStatement1.executeQuery();
 
@@ -40,8 +40,8 @@ public class InfoStudDAO {
                 student.setFullName(resultSet1.getString("fullname"));
                 student.setNumberGroup(resultSet1.getInt("number_group"));
                 student.setNumberStudentCard(resultSet1.getInt("number_student_card"));
-                student.setBegStud(resultSet1.getInt("beg_stud"));
-                student.setEndStud(resultSet1.getInt("end_stud"));
+                student.setBegStud(resultSet1.getDate("beg_stud"));
+                student.setEndStud(resultSet1.getDate("end_stud"));
 
                 students.add(student);
             }
@@ -64,8 +64,8 @@ public class InfoStudDAO {
 
             String SQL1 = "SELECT fullname FROM list_all_student WHERE number_student_card = " + number
                     + " AND " + "number_group = " + resultSet.getInt("number_group")
-                    + " AND " + "beg_stud = " + resultSet.getInt("beg_stud")
-                    + " AND " + "end_stud = " + resultSet.getInt("end_stud");
+                    + " AND " + "beg_stud = " + "'"+resultSet.getDate("beg_stud")+"'"
+                    + " AND " + "end_stud = " + "'"+resultSet.getDate("end_stud")+"'";
 
             Statement statement1 = connection.createStatement();
             ResultSet resultSet1 = statement1.executeQuery(SQL1);
@@ -79,15 +79,15 @@ public class InfoStudDAO {
 
             preparedStatement.setString(1, resultSet1.getString("fullname"));
             preparedStatement.setInt(2, resultSet.getInt("number_group"));
-            preparedStatement.setInt(3, resultSet.getInt("beg_stud"));
-            preparedStatement.setInt(4, resultSet.getInt("end_stud"));
+            preparedStatement.setDate(3, resultSet.getDate("beg_stud"));
+            preparedStatement.setDate(4, resultSet.getDate("end_stud"));
             preparedStatement.setInt(5, number);
             preparedStatement.executeUpdate();
 
             preparedStatement1.setString(1, resultSet1.getString("fullname"));
             preparedStatement1.setInt(2, resultSet.getInt("number_group"));
-            preparedStatement1.setInt(3, resultSet.getInt("beg_stud"));
-            preparedStatement1.setInt(4, resultSet.getInt("end_stud"));
+            preparedStatement1.setDate(3, resultSet.getDate("beg_stud"));
+            preparedStatement1.setDate(4, resultSet.getDate("end_stud"));
             preparedStatement1.setInt(5, number);
             preparedStatement1.executeUpdate();
 
@@ -109,8 +109,8 @@ public class InfoStudDAO {
 
             checkPreparedStatement.setInt(1, resultSet.getInt("number_group"));
             checkPreparedStatement.setInt(2, student.getNumberStudentCard());
-            checkPreparedStatement.setInt(3, resultSet.getInt("beg_stud"));
-            checkPreparedStatement.setInt(4, resultSet.getInt("end_stud"));
+            checkPreparedStatement.setDate(3, resultSet.getDate("beg_stud"));
+            checkPreparedStatement.setDate(4, resultSet.getDate("end_stud"));
             ResultSet checkResultSet = checkPreparedStatement.executeQuery();
             if (checkResultSet.next())
                 return 1;
@@ -123,8 +123,8 @@ public class InfoStudDAO {
             preparedStatement.setString(1, student.getFullName());
             preparedStatement.setInt(2, resultSet.getInt("number_group"));
             preparedStatement.setInt(3, student.getNumberStudentCard());
-            preparedStatement.setInt(4, resultSet.getInt("beg_stud"));
-            preparedStatement.setInt(5, resultSet.getInt("end_stud"));
+            preparedStatement.setDate(4, resultSet.getDate("beg_stud"));
+            preparedStatement.setDate(5, resultSet.getDate("end_stud"));
             preparedStatement.executeUpdate();
 
             PreparedStatement preparedStatement1 =
@@ -132,8 +132,8 @@ public class InfoStudDAO {
 
 
             preparedStatement1.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement1.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement1.setInt(3, resultSet.getInt("end_stud"));
+            preparedStatement1.setDate(2, resultSet.getDate("beg_stud"));
+            preparedStatement1.setDate(3, resultSet.getDate("end_stud"));
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             while (resultSet1.next()) {
 
@@ -142,7 +142,7 @@ public class InfoStudDAO {
                 preparedStatement2.setString(1, student.getFullName());
                 preparedStatement2.setInt(2, resultSet.getInt("number_group"));
                 preparedStatement2.setString(3, resultSet1.getString("course"));
-                preparedStatement2.setInt(4, resultSet1.getInt("year_of_study"));
+                preparedStatement2.setDate(4, resultSet1.getDate("year_of_study"));
                 preparedStatement2.setInt(5, student.getNumberStudentCard());
 
                 preparedStatement2.executeUpdate();

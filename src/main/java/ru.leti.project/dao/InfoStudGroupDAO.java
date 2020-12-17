@@ -5,9 +5,13 @@ import ru.leti.project.config.ConfigConnection;
 import ru.leti.project.models.Group;
 
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
 
 @Component
 public class InfoStudGroupDAO {
@@ -28,8 +32,8 @@ public class InfoStudGroupDAO {
 
                 group.setId(resultSet.getInt("id"));
                 group.setNumberGroup(resultSet.getInt("number_group"));
-                group.setBegStud(resultSet.getInt("beg_stud"));
-                group.setEndStud(resultSet.getInt("end_stud"));
+                group.setBegStud(resultSet.getDate("beg_stud"));
+                group.setEndStud(resultSet.getDate("end_stud"));
 
                 groups.add(group);
             }
@@ -42,24 +46,30 @@ public class InfoStudGroupDAO {
     }
 
 
-    public void save(Group group) {
+    public int save(Group group) {
         try {
+            if (group.getBegStud().after(group.getEndStud())) {
+                return 1;
+            }
+
+
             PreparedStatement preparedStatement =
                     connection.prepareStatement("INSERT INTO enum_of_groups(number_group , beg_stud, end_stud) VALUES(?, ?, ?)");
 
             preparedStatement.setInt(1, group.getNumberGroup());
-            preparedStatement.setInt(2, group.getBegStud());
-            preparedStatement.setInt(3, group.getEndStud());
+            preparedStatement.setDate(2, group.getBegStud());
+            preparedStatement.setDate(3, group.getEndStud());
 
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return 0;
     }
 
 
-    public void delete(int id) {// ДОБАВИТЬ ПРОВЕРКУ НА ТО ЧТО А ЕСТЬ ЛИ ДАННЫЕ В ТАБЛИЦЕ ВООБЩЕ ПРИ УДАЛЕНИИ!!!!!!!!!!!
+    public void delete(int id) {
 
 
         try {
@@ -74,18 +84,18 @@ public class InfoStudGroupDAO {
             resultSet.next();
 
             preparedStatement5.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement5.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement5.setInt(3, resultSet.getInt("end_stud"));
+            preparedStatement5.setDate(2, resultSet.getDate("beg_stud"));
+            preparedStatement5.setDate(3, resultSet.getDate("end_stud"));
             preparedStatement5.executeUpdate();
 
             preparedStatement4.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement4.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement4.setInt(3, resultSet.getInt("end_stud"));
+            preparedStatement4.setDate(2, resultSet.getDate("beg_stud"));
+            preparedStatement4.setDate(3, resultSet.getDate("end_stud"));
             preparedStatement4.executeUpdate();
 
             preparedStatement3.setInt(1, resultSet.getInt("number_group"));
-            preparedStatement3.setInt(2, resultSet.getInt("beg_stud"));
-            preparedStatement3.setInt(3, resultSet.getInt("end_stud"));
+            preparedStatement3.setDate(2, resultSet.getDate("beg_stud"));
+            preparedStatement3.setDate(3, resultSet.getDate("end_stud"));
             preparedStatement3.executeUpdate();
 
             preparedStatement2.setInt(1, id);

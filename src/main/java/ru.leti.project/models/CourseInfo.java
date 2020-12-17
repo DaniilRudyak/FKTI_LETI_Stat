@@ -1,33 +1,47 @@
 package ru.leti.project.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.sql.Date;
 
 @Data
 public class CourseInfo {
 
     private int id;
+
+    @Size(min = 10, max = 40, message = "Student's name should be between 10 and 40 characters")
     private String nameStudent;
+
+    @Min(value = 1000,message = "Group number should be only 4 characters")
+    @Max(value = 9999,message = "Group number card should be only 4 characters")
     private int numberGroup;
+
+    @Size(min = 10, max = 40, message = "Teacher's name should be between 10 and 40 characters")
     private String nameTeacher;
 
-    @NotEmpty(message = "Name course should not be empty")
-    @Size(min = 3, max = 20, message = "Name course should be between 3 and 20 characters")
+    @NotEmpty(message = "Course name course should not be empty")
+    @Size(min = 2, max = 20, message = "Course name should be between 2 and 20 characters")
     private String nameCourse;
 
-    private int yearOfCertification;
+    private Date yearOfCertification;
+
+    @Min(value = 100000,message = "Number of student card should be only 6 characters")
+    @Max(value = 999999,message = "Number of student card should be only 6 characters")
     private int numberStudentCard;
 
-    @Size(min = 2, max = 5, message = "The mark can't be less than 2 or more than 5")
+    @Range(min = 2,max = 5,message = "Mark should be between 2 and 5")
     private int mark;
 
     public CourseInfo() {
     }
 
 
-    public CourseInfo(int id, String nameStudent, int numberGroup, String nameTeacher, String nameCourse, int yearOfCertification, int numberStudentCard, int mark) {
+    public CourseInfo(int id, String nameStudent, int numberGroup, String nameTeacher, String nameCourse, Date yearOfCertification, int numberStudentCard, int mark) {
         this.id = id;
         this.nameStudent = nameStudent;
         this.numberGroup = numberGroup;

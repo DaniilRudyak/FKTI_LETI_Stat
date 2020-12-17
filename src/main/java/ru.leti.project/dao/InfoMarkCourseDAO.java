@@ -15,7 +15,7 @@ import java.util.List;
 public class InfoMarkCourseDAO {
     Connection connection = ConfigConnection.connection;
 
-    public List<CourseInfo> index(int id, String course, int year) {
+    public List<CourseInfo> index(int id, String course, Date year) {
         List<CourseInfo> courseInfos = new ArrayList<>();
 
         try {
@@ -31,10 +31,10 @@ public class InfoMarkCourseDAO {
 
             preparedStatement1.setInt(1, resultSet.getInt("number_group"));
             preparedStatement1.setString(2, course);
-            preparedStatement1.setInt(3, year);
+            preparedStatement1.setDate(3, year);
             ResultSet resultSet1 = preparedStatement1.executeQuery();
 
-            String SQL = "SELECT fullname FROM list_all_teacher WHERE course = '" + course + "' AND " + "year_of_study = " + year;
+            String SQL = "SELECT fullname FROM list_all_teacher WHERE course = '" + course + "' AND " + "year_of_study = " + "'"+year+"'";
             Statement statement = connection.createStatement();
             ResultSet resultSet2 = statement.executeQuery(SQL);
             resultSet2.next();
@@ -62,7 +62,7 @@ public class InfoMarkCourseDAO {
         return courseInfos;
     }
 
-    public CourseInfo show(int id, int number, String course, int year) {
+    public CourseInfo show(int id, int number, String course, Date year) {
         CourseInfo courseInfo = null;
 
         try {
@@ -73,7 +73,7 @@ public class InfoMarkCourseDAO {
 
             String SQL1 = "SELECT * FROM grade_sheet WHERE number_group = " + resultSet.getInt("number_group")
                     + " AND " + "course = '" + course
-                    + "' AND year_of_certification = " + year
+                    + "' AND year_of_certification = " + "'"+year+"'"
                     + " AND number_student_card = " + number;
 
             Statement statement1 = connection.createStatement();
@@ -81,7 +81,7 @@ public class InfoMarkCourseDAO {
             resultSet1.next();
 
 
-            String SQL2 = "SELECT fullname FROM list_all_teacher WHERE course = '" + course + "' AND " + "year_of_study = " + year + " AND teaching_group_number = " + resultSet1.getInt("number_group");
+            String SQL2 = "SELECT fullname FROM list_all_teacher WHERE course = '" + course + "' AND " + "year_of_study = '" + year + "' AND teaching_group_number = " + resultSet1.getInt("number_group");
             Statement statement2 = connection.createStatement();
             ResultSet resultSet2 = statement2.executeQuery(SQL2);
             resultSet2.next();
@@ -111,7 +111,7 @@ public class InfoMarkCourseDAO {
                     + " WHERE fullname = '" + courseInfo.getNameStudent() + "' AND "
                     + "number_group = " + courseInfo.getNumberGroup() + " AND "
                     + "course = '" + courseInfo.getNameCourse() + "' AND "
-                    + "year_of_certification = " + courseInfo.getYearOfCertification() + " AND "
+                    + "year_of_certification = " + "'"+courseInfo.getYearOfCertification()+"'" + " AND "
                     + "number_student_card = " + courseInfo.getNumberStudentCard();
             Statement statement = connection.createStatement();
             ;
@@ -121,7 +121,7 @@ public class InfoMarkCourseDAO {
         }
     }
 
-    public void createCSVFile(String path, int id, String course, int year) {
+    public void createCSVFile(String path, int id, String course, Date year) {
         ResultSet resultSet = null;
         ResultSet resultSet1 = null;
 
@@ -134,7 +134,7 @@ public class InfoMarkCourseDAO {
             String SQL1 = "SELECT * FROM grade_sheet WHERE " +
                     "number_group = " + resultSet.getInt("number_group") + " AND "
                     + "course = '" + course + "' AND "
-                    + "year_of_certification = " + year;
+                    + "year_of_certification = " + "'"+year+"'";
             Statement statement1 = connection.createStatement();
             resultSet1 = statement1.executeQuery(SQL1);
 
@@ -146,7 +146,7 @@ public class InfoMarkCourseDAO {
         try {
 
 
-            String csv = course + "_group_" + resultSet.getInt("number_group") + '_' + year + " .csv";
+            String csv = course + "_group_" + resultSet.getInt("number_group") + '_' + "'"+year+"'" + " .csv";
             writer = new CSVWriter(new FileWriter(path + '/' + csv), ';');
             //Create record
             writer.writeAll(resultSet1, true);

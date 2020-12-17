@@ -2,7 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update person</title>
+    <title>Update student's mark</title>
+    <style>
+        .button {
+            background-color: #dfdddf;
+            color: black;
+            padding: 4px 13px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius:6px;
+            border:thin black;
+        }
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position:  300px 260px ;
+            background-repeat: no-repeat;
+        }</style>
 </head>
 <body>
 
@@ -10,35 +30,24 @@
       th:action="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${courseInfo.getNameCourse()},year=${courseInfo.getYearOfCertification()})}"
       th:object="${courseInfo}">
 
-    <label for="nameStudent">Enter name student: </label>
-    <input type="text" th:field="*{nameStudent}" id="nameStudent"/>
-    <br/>
+    <input type="hidden" th:field="*{nameStudent}" id="nameStudent"/>
 
-    <label for="numberGroup">Enter Number Group: </label>
-    <input type="text" th:field="*{numberGroup}" id="numberGroup"/>
-    <br/>
+    <input type="hidden" th:field="*{numberGroup}" id="numberGroup"/>
 
-    <label for="nameTeacher">Enter nameTeacher: </label>
-    <input type="text" th:field="*{nameTeacher}" id="nameTeacher"/>
-    <br/>
+    <input type="hidden" th:field="*{nameTeacher}" id="nameTeacher"/>
 
-    <label for="nameCourse">Enter nameCourse: </label>
-    <input type="text" th:field="*{nameCourse}" id="nameCourse"/>
-    <br/>
+    <input type="hidden" th:field="*{nameCourse}" id="nameCourse"/>
 
-    <label for="yearOfCertification">Enter yearOfCertification: </label>
-    <input type="text" th:field="*{yearOfCertification}" id="yearOfCertification"/>
-    <br/>
+    <input type="hidden" th:field="*{yearOfCertification}" id="yearOfCertification"/>
 
-    <label for="numberStudentCard">Enter numberStudentCard: </label>
-    <input type="text" th:field="*{numberStudentCard}" id="numberStudentCard"/>
-    <br/>
+    <input type="hidden" th:field="*{numberStudentCard}" id="numberStudentCard"/>
 
     <label for="mark">Enter mark: </label>
     <input type="text" th:field="*{mark}" id="mark"/>
+    <div style="color:red" th:if="${#fields.hasErrors('mark')}" th:errors="*{mark}"></div>
     <br/>
     <input type="submit" value="Update!"/>
 </form>
-<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${course},year=${year})}"> Back </a>
+<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${course},year=${year})}" class="button"> Back </a>
 </body>
 </html>

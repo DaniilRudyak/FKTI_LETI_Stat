@@ -35,13 +35,15 @@ public class InfoStudGroupController {
     }
 
     @PostMapping()
-    public String createGroup(@ModelAttribute("group") Group group,
+    public String createGroup(@ModelAttribute("group") @Valid Group group,
                               BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "fkti/groups/new";
+            return "info/new_group";
 
-        infoStudGroupDAO.save(group);
-        return "redirect:/fkti/groups";
+        if (infoStudGroupDAO.save(group) == 1)
+            return "error/error_new_group";
+        else
+            return "redirect:/fkti/groups";
     }
 
 

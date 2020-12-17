@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>EROR!!!</title>
+    <title>ERROR!!!</title>
 </head>
 <body>
-<h1>A student with this student ID number already exists in the selected group</h1>
+<h2 style="color: crimson">>A student with this student ID number already exists in the selected group</h2>
 
 <a th:href="@{/fkti/groups/list/students/{id}(id=${id})}">Try again</a>
 </body>
