@@ -2,7 +2,8 @@ package ru.leti.project.models;
 
 import lombok.Data;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 
 @Data

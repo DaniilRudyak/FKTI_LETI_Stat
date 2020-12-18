@@ -4,14 +4,9 @@ import org.springframework.stereotype.Component;
 import ru.leti.project.config.ConfigConnection;
 import ru.leti.project.models.Group;
 
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.PreparedStatement;
 
 @Component
 public class InfoStudGroupDAO {

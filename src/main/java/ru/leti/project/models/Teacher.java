@@ -1,9 +1,9 @@
 package ru.leti.project.models;
 
 import lombok.Data;
-import org.hibernate.validator.internal.util.StringHelper;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Data

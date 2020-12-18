@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import ru.leti.project.config.ConfigConnection;
 import ru.leti.project.models.Teacher;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

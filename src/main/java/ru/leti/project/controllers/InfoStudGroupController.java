@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.leti.project.dao.InfoStudGroupDAO;
 import ru.leti.project.models.Group;
 
-
 import javax.validation.Valid;
 
 @Controller
