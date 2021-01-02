@@ -21,8 +21,6 @@ public class CourseInfo {
     @Max(value = 9999,message = "Group number card should be only 4 characters")
     private int numberGroup;
 
-    @Size(min = 10, max = 40, message = "Teacher's name should be between 10 and 40 characters")
-    private String nameTeacher;
 
     @NotEmpty(message = "Course name course should not be empty")
     @Size(min = 2, max = 20, message = "Course name should be between 2 and 20 characters")
@@ -37,18 +35,20 @@ public class CourseInfo {
     @Range(min = 2,max = 5,message = "Mark should be between 2 and 5")
     private int mark;
 
+    @Size(min = 10, max = 40, message = "Teacher's name should be between 10 and 40 characters")
+    private String nameTeacher;
     public CourseInfo() {
     }
 
 
-    public CourseInfo(int id, String nameStudent, int numberGroup, String nameTeacher, String nameCourse, Date yearOfCertification, int numberStudentCard, int mark) {
+    public CourseInfo(int id, String nameStudent, int numberGroup, String nameCourse, Date yearOfCertification, int numberStudentCard, int mark, String nameTeacher) {
         this.id = id;
         this.nameStudent = nameStudent;
         this.numberGroup = numberGroup;
-        this.nameTeacher = nameTeacher;
         this.nameCourse = nameCourse;
         this.yearOfCertification = yearOfCertification;
         this.numberStudentCard = numberStudentCard;
         this.mark = mark;
+        this.nameTeacher = nameTeacher;
     }
 }

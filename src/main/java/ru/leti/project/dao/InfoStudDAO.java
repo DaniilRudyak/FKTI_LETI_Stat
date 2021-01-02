@@ -1,5 +1,6 @@
 package ru.leti.project.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -18,9 +19,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class InfoStudDAO {
-    Connection connection = ConfigConnection.connection;
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public InfoStudDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -38,9 +39,8 @@ public class InfoStudDAO {
         Group group = jdbcTemplate.query("SELECT * FROM enum_of_groups WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Group.class))
                 .stream().findAny().orElse(null);
 
-        String fullname = jdbcTemplate.query("SELECT fullname FROM list_all_student WHERE number_student_card = ? AND number_group = ? AND beg_stud = ? AND end_stud = ?"
-                , new Object[]{number, group.getNumberGroup(), group.getBegStud(), group.getEndStud()}, new BeanPropertyRowMapper<>(String.class))
-                .stream().findAny().orElse(null);
+        String fullname = jdbcTemplate.queryForObject("SELECT fullname FROM list_all_student WHERE number_student_card = ? AND number_group = ? AND beg_stud = ? AND end_stud = ?"
+                , new Object[]{number, group.getNumberGroup(), group.getBegStud(), group.getEndStud()}, String.class);
 
         jdbcTemplate.update("DELETE FROM list_all_student WHERE fullname = ? AND number_group = ? AND beg_stud = ? AND end_stud = ? AND number_student_card = ?",
                 fullname, group.getNumberGroup(), group.getBegStud(), group.getEndStud(), number);
