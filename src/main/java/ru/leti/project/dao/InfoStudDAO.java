@@ -4,18 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import ru.leti.project.config.ConfigConnection;
 import ru.leti.project.models.Group;
 import ru.leti.project.models.Student;
 
-import java.sql.*;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
 
 @Component
 public class InfoStudDAO {

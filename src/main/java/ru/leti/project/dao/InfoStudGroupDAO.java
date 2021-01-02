@@ -6,8 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.leti.project.models.Group;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -40,15 +38,15 @@ public class InfoStudGroupDAO {
                 .stream().findAny().orElse(null);
 
         jdbcTemplate.update("DELETE FROM list_all_teacher WHERE teaching_group_number = ? AND year_of_study >= ? AND year_of_study <= ?"
-                ,group.getNumberGroup(),group.getBegStud(),group.getEndStud());
+                , group.getNumberGroup(), group.getBegStud(), group.getEndStud());
 
         jdbcTemplate.update("DELETE FROM list_all_student WHERE number_group = ? AND beg_stud = ? AND end_stud = ?"
-                ,group.getNumberGroup(),group.getBegStud(),group.getEndStud());
+                , group.getNumberGroup(), group.getBegStud(), group.getEndStud());
 
         jdbcTemplate.update("DELETE FROM grade_sheet WHERE number_group = ? AND year_of_certification >= ? AND year_of_certification <= ?"
-                ,group.getNumberGroup(),group.getBegStud(),group.getEndStud());
+                , group.getNumberGroup(), group.getBegStud(), group.getEndStud());
 
         jdbcTemplate.update("DELETE FROM enum_of_groups WHERE id=?"
-                ,id);
+                , id);
     }
 }

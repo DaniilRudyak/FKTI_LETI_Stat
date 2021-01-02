@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import ru.leti.project.config.ConfigConnection;
 import ru.leti.project.config.SpringConfig;
 import ru.leti.project.models.CourseInfo;
 import ru.leti.project.models.Group;
@@ -14,13 +13,10 @@ import ru.leti.project.rowmapper.InfoMarkCourseRowMapper;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class InfoMarkCourseDAO {
-    Connection connection = ConfigConnection.connection;
-
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
