@@ -37,7 +37,7 @@ public class InfoTeacherCourseController {
     }
 
     @PostMapping("/{id}")
-    public String createTeacher(@ModelAttribute("teacher")@Valid Teacher teacher, BindingResult bindingResult, @PathVariable("id") int id) {
+    public String createTeacher(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "info/new_course";
 

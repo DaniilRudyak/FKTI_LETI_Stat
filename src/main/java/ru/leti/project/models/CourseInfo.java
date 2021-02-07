@@ -17,8 +17,8 @@ public class CourseInfo {
     @Size(min = 10, max = 40, message = "Student's name should be between 10 and 40 characters")
     private String nameStudent;
 
-    @Min(value = 1000,message = "Group number should be only 4 characters")
-    @Max(value = 9999,message = "Group number card should be only 4 characters")
+    @Min(value = 1000, message = "Group number should be only 4 characters")
+    @Max(value = 9999, message = "Group number card should be only 4 characters")
     private int numberGroup;
 
 
@@ -28,15 +28,16 @@ public class CourseInfo {
 
     private Date yearOfCertification;
 
-    @Min(value = 100000,message = "Number of student card should be only 6 characters")
-    @Max(value = 999999,message = "Number of student card should be only 6 characters")
+    @Min(value = 100000, message = "Number of student card should be only 6 characters")
+    @Max(value = 999999, message = "Number of student card should be only 6 characters")
     private int numberStudentCard;
 
-    @Range(min = 2,max = 5,message = "Mark should be between 2 and 5")
+    @Range(min = 2, max = 5, message = "Mark should be between 2 and 5")
     private int mark;
 
     @Size(min = 10, max = 40, message = "Teacher's name should be between 10 and 40 characters")
     private String nameTeacher;
+
     public CourseInfo() {
     }
 

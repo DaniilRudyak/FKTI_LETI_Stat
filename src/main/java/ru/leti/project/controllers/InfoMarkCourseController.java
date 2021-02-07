@@ -1,5 +1,6 @@
 package ru.leti.project.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,14 @@ import java.sql.Date;
 
 @Controller
 @RequestMapping(value = "/fkti/groups/list/course/mark")
+@AllArgsConstructor
 public class InfoMarkCourseController {
     private final InfoMarkCourseDAO infoMarkCourseDAO;
 
-    @Autowired
-    public InfoMarkCourseController(InfoMarkCourseDAO infoMarkCourseDAO) {
-        this.infoMarkCourseDAO = infoMarkCourseDAO;
-    }
+   // @Autowired
+   // public InfoMarkCourseController(InfoMarkCourseDAO infoMarkCourseDAO) {
+       // this.infoMarkCourseDAO = infoMarkCourseDAO;
+    //}
 
     @GetMapping("/{id}/{course}/{year}")
     public String index(Model model, @PathVariable("year") Date year, @PathVariable("course") String course, @PathVariable("id") int id) {

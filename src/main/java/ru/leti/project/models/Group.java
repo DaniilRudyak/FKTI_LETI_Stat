@@ -9,8 +9,8 @@ import java.sql.Date;
 @Data
 public class Group {
     private int id;
-    @Min(value = 1000,message = "Group number should be only 4 characters")
-    @Max(value = 9999,message = "Group number card should be only 4 characters")
+    @Min(value = 1000, message = "Group number should be only 4 characters")
+    @Max(value = 9999, message = "Group number card should be only 4 characters")
     private int numberGroup;
 
     private Date begStud;
