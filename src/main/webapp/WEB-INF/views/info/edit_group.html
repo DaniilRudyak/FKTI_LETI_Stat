@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New group</title>
+    <style>
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position:  300px 260px ;
+            background-repeat: no-repeat;
+        }</style>
+</head>
+<body>
+<style>
+    .button {
+        background-color: #dfdddf;
+        color: black;
+        padding: 4px 13px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius:6px;
+        border:thin black;
+    }
+    {
+        box-sizing: border-box
+    ;
+    }
+
+
+    textarea {
+        width: 100%;
+        resize: vertical;
+        padding: 15px;
+        border-radius: 15px;
+        border: 0;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+        height: 150px;
+    }
+</style>
+
+<form th:method="PATCH" th:action="@{/fkti/groups/{idGroup}/edit(idGroup=${idGroup})}" th:object="${group}">
+    <input type="hidden" th:field="*{id}" id="id"/>
+
+    <label for="numberGroup">Enter number group: </label>
+    <input type="text" th:field="*{numberGroup}" id="numberGroup"/>
+    <div style="color:red" th:if="${#fields.hasErrors('numberGroup')}" th:errors="*{numberGroup}"></div>
+    <br/>
+
+    <label for="begStud">Enter begin study date: </label>
+    <input type="date" th:field="*{begStud}" id="begStud"/>
+    <br/>
+
+    <label for="endStud">Enter end study date: </label>
+    <input type="date" th:field="*{endStud}" id="endStud"/>
+    <br/>
+
+    <input type="submit" value="Update!"/>
+</form>
+
+
+<a th:href="@{/fkti/groups}" class="button"> Back </a>
+</body>
+</html>

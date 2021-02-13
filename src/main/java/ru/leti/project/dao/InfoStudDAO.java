@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.leti.project.models.Group;
 import ru.leti.project.models.Student;
+import ru.leti.project.rowmapper.StudentRowMapper;
 
 
 import java.util.List;
@@ -45,9 +46,9 @@ public class InfoStudDAO {
                 fullname, group.getNumberGroup(), group.getBegStud(), group.getEndStud(), number);
     }
 
-    public int save(Student student, int id) {
+    public int save(Student student, int idGroup) {
 
-        Group group = jdbcTemplate.query("SELECT * FROM enum_of_groups WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Group.class))
+        Group group = jdbcTemplate.query("SELECT * FROM enum_of_groups WHERE id=?", new Object[]{idGroup}, new BeanPropertyRowMapper<>(Group.class))
                 .stream().findAny().orElse(null);
 
         Student studentCheck = jdbcTemplate.query("SELECT * FROM list_all_student WHERE number_group = ? AND number_student_card = ? AND beg_stud = ? AND end_stud = ?",
@@ -70,5 +71,26 @@ public class InfoStudDAO {
                         , student.getFullName(), group.getNumberGroup(), key, ((Integer) (cur.get(key))).intValue(), student.getNumberStudentCard());
         }
         return 0;
+    }
+
+    public void update(Student newStudent) {
+        Student oldStudent= jdbcTemplate.query("SELECT * FROM list_all_student WHERE id = ?", new Object[]{newStudent.getId()}, new StudentRowMapper())
+                .stream().findAny().orElse(null);
+
+
+        jdbcTemplate.update("UPDATE list_all_student SET fullname = ?, number_student_card = ?  WHERE id = ?",
+                new Object[]{newStudent.getFullName(), newStudent.getNumberStudentCard(), newStudent.getId()});
+
+        jdbcTemplate.update("UPDATE grade_sheet SET fullname = ?, number_student_card = ? " +
+                        "WHERE fullname = ? AND number_group = ? AND number_student_card = ? AND year_of_certification >= ? AND year_of_certification <= ?",
+                new Object[]{newStudent.getFullName(), newStudent.getNumberStudentCard(),
+                oldStudent.getFullName(),oldStudent.getNumberGroup(),oldStudent.getNumberStudentCard(),oldStudent.getBegStud(),oldStudent.getEndStud()});
+    }
+
+    public Student show(int idStudent, int number) {
+        Student student = jdbcTemplate.query("SELECT * FROM list_all_student WHERE id = ?", new Object[]{idStudent}, new StudentRowMapper())
+                .stream().findAny().orElse(null);
+
+        return student;
     }
 }

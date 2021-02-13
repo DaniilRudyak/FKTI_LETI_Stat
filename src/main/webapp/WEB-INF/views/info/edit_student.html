@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New student</title>
+    <style>
+        .button {
+            background-color: #dfdddf;
+            color: black;
+            padding: 4px 13px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 6px;
+            border: thin black;
+        }
+
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position: 300px 260px;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+<style>
+    body {
+        margin: 20px;
+        background-color: #fafafa;
+    }</style>
+<form th:method="PATCH"
+      th:action="@{/fkti/groups/list/students/{idGroup}/{number}/{idStudent}(idGroup=${idGroup},number=${student.getNumberGroup()},idStudent=${student.getId()})}"
+      th:object="${student}">
+
+    <input type="hidden" th:field="*{id}" id="id"/>
+
+    <label for="fullName">Enter full name student: </label>
+    <input type="text" th:field="*{fullName}" id="fullName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+    <br/>
+
+    <input type="hidden" th:field="*{numberGroup}" id="numberGroup"/>
+
+
+    <label for="numberStudentCard">Enter number student card group: </label>
+    <input type="text" th:field="*{numberStudentCard}" id="numberStudentCard"/>
+    <div style="color:red" th:if="${#fields.hasErrors('numberStudentCard')}" th:errors="*{numberStudentCard}"></div>
+    <br/>
+
+    <input type="hidden" th:field="*{begStud}" id="begStud"/>
+
+    <input type="hidden" th:field="*{endStud}" id="endStud"/>
+
+    <input type="submit" value="Update!"/>
+</form>
+<br/>
+<a th:href="@{/fkti/groups/list/students/{idGroup}(idGroup=${idGroup})}" class="button"> Back </a>
+</body>
+</html>

@@ -66,6 +66,7 @@
         <th>List students in group</th>
         <th>List course in group</th>
         <th>Delete</th>
+        <th>Edit</th>
     </tr>
     <div th:each="group : ${groups}">
         <tr>
@@ -78,6 +79,10 @@
                 <form th:method="DELETE" th:action="@{/fkti/groups/{id}(id=${group.getId()})}"><input type="submit"
                                                                                                       value="Delete"/>
                 </form>
+            </td>
+            <td>
+                <a th:href="@{/fkti/groups/{id}/edit(id=${group.getId()})}" class="button">Edit
+                </a>
             </td>
         </tr>
     </div>

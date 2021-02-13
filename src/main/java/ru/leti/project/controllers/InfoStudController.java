@@ -52,4 +52,22 @@ public class InfoStudController {
         infoStudDAO.delete(id, number);
         return "redirect:/fkti/groups/list/students/{id}";
     }
+
+    @GetMapping("/{idGroup}/{number}/{idStudent}")
+    public String edit(@PathVariable("idGroup") int idGroup, @PathVariable("number") int number, @PathVariable("idStudent") int idStudent, Model model) {
+        model.addAttribute("student", infoStudDAO.show(idStudent, number));
+
+        return "info/edit_student";
+    }
+
+    @PatchMapping("/{idGroup}/{number}/{idStudent}")
+    public String update(@ModelAttribute("student") @Valid Student student, @PathVariable("idGroup") int idGroup, @PathVariable("idStudent") int idStudent, @PathVariable("number") int number, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return "info/edit_student";
+
+        infoStudDAO.update(student);
+        return "redirect:/fkti/groups/list/students/{idGroup}";
+    }
+
 }

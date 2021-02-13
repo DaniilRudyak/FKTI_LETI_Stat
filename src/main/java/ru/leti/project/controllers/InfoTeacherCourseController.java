@@ -52,4 +52,20 @@ public class InfoTeacherCourseController {
         infoTeacherCourseDAO.delete(id, course, year);
         return "redirect:/fkti/groups/list/course/{id}";
     }
+
+    @GetMapping("/{idGroup}/{course}/{year}/{idTeacher}")
+    public String edit(@PathVariable("idGroup") int idGroup, @PathVariable("course") String course, @PathVariable("year") Date year, @PathVariable("idTeacher") int idTeacher, Model model) {
+        model.addAttribute("teacher", infoTeacherCourseDAO.show(idTeacher));
+        return "info/edit_course";
+    }
+
+    @PatchMapping("/{idGroup}/{course}/{year}/{idTeacher}")
+    public String update(@ModelAttribute("teacher") @Valid Teacher teacher, @PathVariable("idGroup") int idGroup, @PathVariable("course") String course, @PathVariable("year") Date year, @PathVariable("idTeacher") int idTeacher, BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "info/edit_course";
+
+        infoTeacherCourseDAO.update(teacher);
+        return "redirect:/fkti/groups/list/course/{idGroup}";
+    }
+
 }

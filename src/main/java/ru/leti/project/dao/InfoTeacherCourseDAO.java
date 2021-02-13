@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
 import ru.leti.project.models.Group;
 import ru.leti.project.models.Student;
 import ru.leti.project.models.Teacher;
@@ -69,5 +70,22 @@ public class InfoTeacherCourseDAO {
 
         jdbcTemplate.update("DELETE FROM list_all_teacher WHERE teaching_group_number = ? AND course = ? AND year_of_study = ?"
                 , group.getNumberGroup(), course, year);
+    }
+
+    public Teacher show(int idTeach) {
+        return jdbcTemplate.query("SELECT * FROM list_all_teacher WHERE id= ?"
+                , new Object[]{idTeach}, new InfoTeacherCourseRowMapper()).stream().findAny().orElse(null);
+    }
+
+    public void update(Teacher newTeacher){
+        Teacher oldTeacher = jdbcTemplate.query("SELECT * FROM list_all_teacher WHERE id= ?"
+                , new Object[]{newTeacher.getId()}, new InfoTeacherCourseRowMapper()).stream().findAny().orElse(null);
+
+        jdbcTemplate.update("UPDATE list_all_teacher SET fullname = ?, course = ?, year_of_study = ? " +
+                "WHERE id = ?", new Object[]{newTeacher.getFullName(),newTeacher.getNameCourse(),newTeacher.getYearsStudy(),newTeacher.getId()});
+
+        jdbcTemplate.update("UPDATE grade_sheet SET course = ?, year_of_certification = ? " +
+                "WHERE number_group = ? AND course = ? AND year_of_certification = ?",
+                new Object[]{newTeacher.getNameCourse(),newTeacher.getYearsStudy(),oldTeacher.getNumberInGroupCourse(),oldTeacher.getNameCourse(),oldTeacher.getYearsStudy()});
     }
 }

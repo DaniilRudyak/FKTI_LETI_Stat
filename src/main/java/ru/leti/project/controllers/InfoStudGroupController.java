@@ -45,6 +45,21 @@ public class InfoStudGroupController {
             return "redirect:/fkti/groups";
     }
 
+    @GetMapping("{idGroup}/edit")
+    public String edit(@PathVariable("idGroup") int idGroup, Model model){
+        model.addAttribute("group", infoStudGroupDAO.show(idGroup));
+        return "info/edit_group";
+
+    }
+@PatchMapping("{idGroup}/edit")
+public String update(@ModelAttribute("group") Group group,@PathVariable("idGroup") int idGroup, BindingResult bindingResult){
+    if (bindingResult.hasErrors())
+        return "info/edit_group";
+
+    infoStudGroupDAO.update(group);
+        return "redirect:/fkti/groups";
+
+}
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
