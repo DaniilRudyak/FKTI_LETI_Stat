@@ -33,13 +33,17 @@ public class InfoMarkCourseDAO {
                 , new Object[]{group.getNumberGroup(), course, year}, new InfoMarkCourseRowMapper());
 
         String fullname = jdbcTemplate.queryForObject("SELECT fullname FROM list_all_teacher WHERE course = ? AND year_of_study = ?"
-                , new Object[]{course, year}, String.class);
+                , new Object[]{course, year}, String.class); //это должно стать с джойнами
 
         for (CourseInfo courseInfo : courseInfoList) {
             courseInfo.setNameTeacher(fullname);
         }
 
-        return courseInfoList;
+        return courseInfoList;// смотри тут лучше передлать в джойены то есть 4 таблички хранить ну такое точнее ты вчера понял о чем просто
+        //короче когда ты будешь роли раздавать кто какой доступ имеет тебе прийдется много запорсов делать чтобы поддерживать связность во всех таблицах
+          //      то есть если я поменяю номер г8руппы мне надо будет поменять номер в таблицке  с оценками с преподами и со стдуентами
+            //    и аналогичнро когда редачить преподов и их предмет то есмть надо будет переделать все DAO но тебе тут полегче потому что я писал тогда на JDBC   не на темплейтах в одну строчку
+              //  напиши если ъхоть что то понял типа что-то понял да
 
     }
 
@@ -56,7 +60,7 @@ public class InfoMarkCourseDAO {
 
         courseInfo.setNameTeacher(fullNameTeacher);
 
-        return courseInfo;
+        return courseInfo; //и это
     }
 
     public void update(CourseInfo courseInfo) {
@@ -86,7 +90,7 @@ public class InfoMarkCourseDAO {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throwables.printStackTrace(); //и все дао) удачи:)
         }
     }
 }

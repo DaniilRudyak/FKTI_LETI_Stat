@@ -2,6 +2,7 @@ package ru.leti.project.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,6 +40,7 @@ public class InfoMarkCourseController {
         model.addAttribute("year", year);
         return "info/edit_mark";
     }
+
 
     @PatchMapping("/{id}/{course}/{year}")
     public String update(@ModelAttribute("courseInfo")@Valid CourseInfo courseInfo, BindingResult bindingResult, @PathVariable("id") int id) {

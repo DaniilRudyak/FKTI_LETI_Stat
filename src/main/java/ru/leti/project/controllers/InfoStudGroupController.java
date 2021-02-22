@@ -1,6 +1,7 @@
 package ru.leti.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ public class InfoStudGroupController {
 
 
     @GetMapping("/new")
+    @PreAuthorize("hasRole('ADMIN')")
     public String newGroup(@ModelAttribute("group") Group group) {
         return "info/new_group";
     }
@@ -52,6 +54,7 @@ public class InfoStudGroupController {
 
     }
 @PatchMapping("{idGroup}/edit")
+@PreAuthorize("hasAuthority('admin:write')")
 public String update(@ModelAttribute("group") Group group,@PathVariable("idGroup") int idGroup, BindingResult bindingResult){
     if (bindingResult.hasErrors())
         return "info/edit_group";
@@ -62,6 +65,7 @@ public String update(@ModelAttribute("group") Group group,@PathVariable("idGroup
 }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin:write')")
     public String delete(@PathVariable("id") int id) {
         infoStudGroupDAO.delete(id);
         return "redirect:/fkti/groups";

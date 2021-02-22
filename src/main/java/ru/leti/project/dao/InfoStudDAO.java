@@ -9,6 +9,7 @@ import ru.leti.project.models.Student;
 import ru.leti.project.rowmapper.StudentRowMapper;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -65,10 +66,10 @@ public class InfoStudDAO {
                 , group.getNumberGroup(), group.getBegStud(), group.getEndStud());
 
         for (Map<String, Object> cur : listHelper) {
-            Set<String> keySet = cur.keySet();
-            for (String key : keySet)
+            //Set<String> keySet = cur.keySet();
+            //for (String key : keySet)
                 jdbcTemplate.update("INSERT INTO grade_sheet(fullname, number_group, course, year_of_certification, number_student_card ) VALUES(?, ?, ?, ?, ?)"
-                        , student.getFullName(), group.getNumberGroup(), key, ((Integer) (cur.get(key))).intValue(), student.getNumberStudentCard());
+                        , student.getFullName(), group.getNumberGroup(), cur.get("course"), cur.get("year_of_study"), student.getNumberStudentCard());
         }
         return 0;
     }
