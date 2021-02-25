@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>FKTI Groups</title>
+    <title>Marked students</title>
     <style>
         .button {
             background-color: #dfdddf;
@@ -61,26 +61,36 @@
 <body>
 <table>
     <tr>
+        <th>FIO</th>
         <th>Number group</th>
-        <th>Years of study</th>
-        <th>List students in group</th>
-        <th>List course in group</th>
+        <th>Name course</th>
+        <th>Year of certification</th>
+        <th>Name teacher</th>
+        <th>mark</th>
+        <th>Change marks</th>
     </tr>
-    <div th:each="group : ${groups}">
+    <div th:each="mark : ${marks}">
         <tr>
-            <td><a th:text="${group.getNumberGroup()}">number group</a></td>
-            <td><a th:text="${group.getBegStud() + '-' + group.getEndStud()}">number group</a></td>
-            <td><a th:href="@{/fkti/groups/list/students/{id}(id=${group.getId()})}" th:text="View">list students</a>
+            <td><a th:text="${mark.getNameStudent()}">FIO</a></td>
+            <td><a th:text="${mark.getNumberGroup()}">number group</a></td>
+            <td><a th:text="${mark.getNameCourse()}">name course</a></td>
+            <td><a th:text="${mark.getYearOfCertification()}"> year Of Certification</a></td>
+            <td><a th:text="${mark.getNameTeacher()}">name teacher</a></td>
+            <td><a th:text="${mark.getMark()}">mark</a></td>
+            <td>
+                <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/edit/{number}(id=${id},course=${mark.getNameCourse()},year=${mark.getYearOfCertification()},number=${mark.getNumberStudentCard()})}">Edit</a>
             </td>
-            <td><a th:href="@{/fkti/groups/list/course/{id}(id=${group.getId()})}" th:text="View">list course</a></td>
         </tr>
     </div>
 </table>
 <br/>
 <hr/>
 
-<form class="form-signin" method="get" action="/logout"> <br>
-    <button class="button" type="submit">Logout</button>
-</form>
+<a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/download(id=${id},course=${course},year=${year})}">Download
+    list in csv format file</a>
+<br/>
+
+<h3><a th:href="@{/fkti/groups}" class="button"> General page </a></h3>
+<h3><a th:href="@{/fkti/groups/list/course/{id}(id=${id})}" class="button"> Back </a></h3>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" ><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -8,17 +8,21 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
     <style>
-        body{
-            background-color: grey;
-            color: coral;
+        body {
+            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
+            background-size: 620px 270px;
+            background-position:  300px 260px ;
+            background-repeat: no-repeat;
         }
     </style>
+
 </head>
 <span id="warning-container"><i data-reactroot=""></i></span>
 <body>
 <div class="container">
+    <a th:href="@{/registration}" class="btn btn-dark" th:method="GET" > Registration </a>
     <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading">Please login to amigoscode</h2>
+        <h2 class="form-signin-heading">Please login to marks ETU</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
@@ -27,13 +31,9 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
         </p>
-        <p>
-            Remember me?
-            <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
-        </p>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
     </form>
 </div>
 <br>
-<a th:href="@{/registration}" class="button" th:method="GET"> Registration </a>
+
 </body></html>

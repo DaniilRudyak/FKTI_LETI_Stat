@@ -65,8 +65,6 @@
         <th>Number group</th>
         <th>Year of study</th>
         <th>Number student card</th>
-        <th>Delete</th>
-        <th>Edit</th>
     </tr>
     <div th:each="student : ${students}">
 
@@ -81,29 +79,11 @@
             <td th:text="${student.getBegStud() + '-' + student.getEndStud()}">begin study</td>
 
             <td th:text="${student.getNumberStudentCard()}">Number student card</td>
-
-            <td>
-                <form th:method="DELETE"
-                      th:action="@{/fkti/groups/list/students/{id}/{number}(id=${id},number=${student.getNumberStudentCard()})}">
-                    <input type="submit" value="Delete"/></form>
-            </td>
-
-            <td>
-                <a th:href="@{/fkti/groups/list/students/{idGroup}/{number}/{idStudent}(idGroup=${id},number=${student.getNumberStudentCard()},idStudent=${student.getId()})}"
-                   class="button">Edit</a>
-
-            </td>
-
         </tr>
-
-
     </div>
 </table>
 <br/>
 <hr/>
-
-
-<a th:href="@{/fkti/groups/list/students/{id}/new(id=${id})}" class="button">Create new students</a>
 <br/>
 
 <a th:href="@{/fkti/groups}" class="button"> General page </a>

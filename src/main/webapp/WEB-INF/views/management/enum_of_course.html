@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>FKTI Groups</title>
+    <title>Courses list</title>
     <style>
         .button {
             background-color: #dfdddf;
@@ -14,13 +14,14 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
-            border-radius:6px;
-            border:thin black;
+            border-radius: 6px;
+            border: thin black;
         }
+
         body {
             background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
             background-size: 620px 270px;
-            background-position:  300px 260px ;
+            background-position: 300px 260px;
             background-repeat: no-repeat;
         }</style>
 </head>
@@ -57,30 +58,42 @@
         text-align: center;
     }
 </style>
-
 <body>
 <table>
     <tr>
-        <th>Number group</th>
-        <th>Years of study</th>
-        <th>List students in group</th>
-        <th>List course in group</th>
+        <th>Name course</th>
+        <th>Year study</th>
+        <th>Delete</th>
+        <th>Edit</th>
+
     </tr>
-    <div th:each="group : ${groups}">
+    <div th:each="teacher : ${teachers}">
         <tr>
-            <td><a th:text="${group.getNumberGroup()}">number group</a></td>
-            <td><a th:text="${group.getBegStud() + '-' + group.getEndStud()}">number group</a></td>
-            <td><a th:href="@{/fkti/groups/list/students/{id}(id=${group.getId()})}" th:text="View">list students</a>
+            <td>
+                <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}"
+                   th:text="${teacher.getNameCourse()}">name course</a></td>
+            <td><a th:text="${teacher.getYearsStudy()}">name course</a></td>
+            <td>
+                <form th:method="DELETE"
+                      th:action="@{/fkti/groups/list/course/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}">
+                    <input type="submit" value="Delete"/></form>
             </td>
-            <td><a th:href="@{/fkti/groups/list/course/{id}(id=${group.getId()})}" th:text="View">list course</a></td>
+            <td>
+                <a th:href="@{/fkti/groups/list/course/{id}/{course}/{year}/{idTeacher}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()},idTeacher=${teacher.getId()})}"
+                   class="button">Edit
+                </a>
+            </td>
         </tr>
     </div>
 </table>
 <br/>
 <hr/>
 
-<form class="form-signin" method="get" action="/logout"> <br>
-    <button class="button" type="submit">Logout</button>
-</form>
+<a th:href="@{/fkti/groups/list/course/{id}/new(id=${id})}" class="button">Create new course</a>
+<br/>
+
+<a th:href="@{/fkti/groups}" class="button"> General page </a>
+<br/>
+
 </body>
 </html>

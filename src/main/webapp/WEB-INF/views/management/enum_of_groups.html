@@ -65,6 +65,8 @@
         <th>Years of study</th>
         <th>List students in group</th>
         <th>List course in group</th>
+        <th>Delete</th>
+        <th>Edit</th>
     </tr>
     <div th:each="group : ${groups}">
         <tr>
@@ -73,11 +75,22 @@
             <td><a th:href="@{/fkti/groups/list/students/{id}(id=${group.getId()})}" th:text="View">list students</a>
             </td>
             <td><a th:href="@{/fkti/groups/list/course/{id}(id=${group.getId()})}" th:text="View">list course</a></td>
+            <td>
+                <form th:method="DELETE" th:action="@{/fkti/groups/{id}(id=${group.getId()})}"><input type="submit"
+                                                                                                      value="Delete"/>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/fkti/groups/{id}/edit(id=${group.getId()})}" class="button">Edit
+                </a>
+            </td>
         </tr>
     </div>
 </table>
 <br/>
 <hr/>
+
+<a href="/fkti/groups/new" class="button">Create new group </a>
 
 <form class="form-signin" method="get" action="/logout"> <br>
     <button class="button" type="submit">Logout</button>

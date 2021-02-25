@@ -8,21 +8,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.leti.project.rowmapper.ApplicationUserRowMapper;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static ru.leti.project.security.ApplicationUserRole.*;
 
 
-@Repository("fake")
-public class FakeApplicationUserDaoService implements ApplicationUserDao{
+@Repository("userRep")
+public class ApplicationUserDaoImpl implements ApplicationUserDao{
 
     private final JdbcTemplate jdbcTemplate;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
 
     @Autowired
-    public FakeApplicationUserDaoService(JdbcTemplate jdbcTemplate) {
+    public ApplicationUserDaoImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -49,45 +47,6 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
     }
 
     private List<ApplicationUser> getApplicationUsers(){
-//        List<ApplicationUser> list = null;
-//        list = jdbcTemplate.query("SELECT * FROM users" ,new ApplicationUserRowMapper());
-//        return list;
      return jdbcTemplate.query("SELECT * FROM users" ,new ApplicationUserRowMapper());
-
-//        List<ApplicationUser> applicationUsers = Lists.newArrayList(
-//                new ApplicationUser(
-//                        STUDENT.getGrantedAuthorities(),
-//                        passwordEncoder.encode("password"),
-//                        "annasmith",
-//                        "ADMIN",
-//                        true,
-//                        true,
-//                        true,
-//                        true
-//                ),
-//                new ApplicationUser(
-//                        ADMIN.getGrantedAuthorities(),
-//                        passwordEncoder.encode("password"),
-//                        "linda",
-//                        "STUDENT",
-//                        true,
-//                        true,
-//                        true,
-//                        true
-//                ),
-//                new ApplicationUser(
-//                        ADMINTRAINEE.getGrantedAuthorities(),
-//                        passwordEncoder.encode("password"),
-//                        "tom",
-//                        "ADMINTRAINEE",
-//                        true,
-//                        true,
-//                        true,
-//                        true
-//                )
-//
-//        );
-//        return applicationUsers;
-
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.leti.project.auth.ApplicationUser;
 import ru.leti.project.auth.ApplicationUserService;
-import ru.leti.project.auth.FakeApplicationUserDaoService;
+import ru.leti.project.auth.ApplicationUserDaoImpl;
 
 import javax.validation.Valid;
 
@@ -22,11 +22,11 @@ public class TemplateController {
     @Autowired
     private ApplicationUserService applicationUserService;
 
-    public TemplateController(FakeApplicationUserDaoService fakeApplicationUserDaoService) {
-        this.fakeApplicationUserDaoService = fakeApplicationUserDaoService;
+    public TemplateController(ApplicationUserDaoImpl applicationUserDaoImpl) {
+        this.applicationUserDaoImpl = applicationUserDaoImpl;
     }
 
-    private final FakeApplicationUserDaoService fakeApplicationUserDaoService;
+    private final ApplicationUserDaoImpl applicationUserDaoImpl;
 
     @GetMapping("registration")
     public String registration(Model model) {
@@ -36,19 +36,13 @@ public class TemplateController {
 
     @PostMapping("registration")
     public String addUser(@ModelAttribute("userForm") @Valid ApplicationUser userForm, BindingResult bindingResult, Model model) {
-      //  model.addAttribute("passwordCheck", userForm.getPassword());
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-//        if (!userForm.getPassword().equals(model.getAttribute("passwordCheck"))){
-//            model.addAttribute("passwordError", "Пароли не совпадают");
-//            return "registration";
-//        }
-        if ( fakeApplicationUserDaoService.save(userForm)==0 ){
+        if ( applicationUserDaoImpl.save(userForm)==0 ){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
+            return "error/error_registration";
         }
- //       fakeApplicationUserDaoService.save(userForm);
         return "login";
     }
 }

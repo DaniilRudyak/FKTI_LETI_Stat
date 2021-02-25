@@ -1,22 +1,64 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New student</title>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>New student</title>-->
+<!--    <style>-->
+<!--        .button {-->
+<!--            background-color: #dfdddf;-->
+<!--            color: black;-->
+<!--            padding: 4px 13px;-->
+<!--            text-align: center;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            font-size: 16px;-->
+<!--            margin: 4px 2px;-->
+<!--            cursor: pointer;-->
+<!--            border-radius:6px;-->
+<!--            border:thin black;-->
+<!--        }-->
+<!--        body {-->
+<!--            background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");-->
+<!--            background-size: 620px 270px;-->
+<!--            background-position:  300px 260px ;-->
+<!--            background-repeat: no-repeat;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<style>-->
+<!--    body {-->
+<!--        margin: 20px;-->
+<!--        background-color: #fafafa;-->
+<!--    }</style>-->
+<!--<form th:method="POST" th:action="@{/registration}" th:object="${userForm}">-->
+
+<!--    <label for="username">Enter email to register with</label>-->
+<!--    <input type="text" th:field="*{username}" id="username"/>-->
+<!--    <div style="color:#ff0000" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>-->
+<!--    <br/>-->
+
+<!--    <label for="password">Enter password</label>-->
+<!--    <input type="password" th:field="*{password}" id="password"/>-->
+<!--    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>-->
+<!--    <br/>-->
+<!--    <input type="submit" value="Submit"/>-->
+<!--</form>-->
+<!--<br/>-->
+<!--<a th:href="@{/login}" class="button"> Back </a>-->
+<!--</body>-->
+<!--</html>-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ETU Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
     <style>
-        .button {
-            background-color: #dfdddf;
-            color: black;
-            padding: 4px 13px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius:6px;
-            border:thin black;
-        }
         body {
             background-image: url("https://etu.ru/assets/files/ru/universitet/korporativnyj-stil/2019/leti_logo_vertical-eng_blu.png");
             background-size: 620px 270px;
@@ -25,26 +67,25 @@
         }
     </style>
 </head>
+<span id="warning-container"><i data-reactroot=""></i></span>
 <body>
-<style>
-    body {
-        margin: 20px;
-        background-color: #fafafa;
-    }</style>
-<form th:method="POST" th:action="@{/registration}" th:object="${userForm}">
-
-    <label for="username">Enter email to register with</label>
-    <input type="text" th:field="*{username}" id="username"/>
-    <div style="color:#ff0000" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+<div class="container">
+    <a th:href="@{/login}" class="btn btn-success"> Back to login </a>
+    <form class="form-signin" th:method="POST" th:action="@{/registration}" th:object="${userForm}">
+        <h2 class="form-signin-heading">Please register on marks ETU</h2>
+        <p>
+            <label for="username" >Email address</label>
+            <br>
+            <input type="email" th:field="*{username}" id="username" required="" aria-describedby="emailHelp" placeholder="Enter email">
+        </p>
+        <p>
+            <label for="password" >Password</label>
+            <br>
+            <input type="password" th:field="*{password}" id="password" required="" aria-describedby="passwordHelp" placeholder="Password">
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
     <br/>
-
-    <label for="password">Enter password</label>
-    <input type="text" th:field="*{password}" id="password"/>
-    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-    <br/>
-    <input type="submit" value="Submit"/>
-</form>
-<br/>
-<a th:href="@{/login}" class="button"> Back </a>
+</div>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package ru.leti.project.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.RememberMeAuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -42,7 +44,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","index","/css/*","/js/*","/registration","**/edit").permitAll()
+                .antMatchers("/","index","/css/*","/js/*","/registration").permitAll()
 //                .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
 //                .antMatchers(HttpMethod.POST,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
 //                .antMatchers(HttpMethod.PUT,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
@@ -57,11 +59,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("password")
                     .usernameParameter("username")
                 .and()
-                .rememberMe()
-                    .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
-                    .key("somethingverysecured")
-                    .rememberMeParameter("remember-me")
-                .and()
                 .logout()
                     .logoutUrl("/logout")
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
@@ -75,14 +72,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-//    @Autowired
-//    DataSource dataSource;
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .passwordEncoder(passwordEncoder)
-//                .usersByUsernameQuery("SELECT username FROM users");
-//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){

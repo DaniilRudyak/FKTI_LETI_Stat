@@ -39,12 +39,7 @@ public class InfoMarkCourseDAO {
             courseInfo.setNameTeacher(fullname);
         }
 
-        return courseInfoList;// смотри тут лучше передлать в джойены то есть 4 таблички хранить ну такое точнее ты вчера понял о чем просто
-        //короче когда ты будешь роли раздавать кто какой доступ имеет тебе прийдется много запорсов делать чтобы поддерживать связность во всех таблицах
-          //      то есть если я поменяю номер г8руппы мне надо будет поменять номер в таблицке  с оценками с преподами и со стдуентами
-            //    и аналогичнро когда редачить преподов и их предмет то есмть надо будет переделать все DAO но тебе тут полегче потому что я писал тогда на JDBC   не на темплейтах в одну строчку
-              //  напиши если ъхоть что то понял типа что-то понял да
-
+        return courseInfoList;
     }
 
     public CourseInfo show(int id, int number, String course, Date year) {
@@ -60,7 +55,7 @@ public class InfoMarkCourseDAO {
 
         courseInfo.setNameTeacher(fullNameTeacher);
 
-        return courseInfo; //и это
+        return courseInfo;
     }
 
     public void update(CourseInfo courseInfo) {
@@ -90,7 +85,7 @@ public class InfoMarkCourseDAO {
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (SQLException throwables) {
-            throwables.printStackTrace(); //и все дао) удачи:)
+            throwables.printStackTrace();
         }
     }
 }

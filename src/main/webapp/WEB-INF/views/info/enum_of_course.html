@@ -63,8 +63,6 @@
     <tr>
         <th>Name course</th>
         <th>Year study</th>
-        <th>Delete</th>
-        <th>Edit</th>
 
     </tr>
     <div th:each="teacher : ${teachers}">
@@ -73,23 +71,12 @@
                 <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}"
                    th:text="${teacher.getNameCourse()}">name course</a></td>
             <td><a th:text="${teacher.getYearsStudy()}">name course</a></td>
-            <td>
-                <form th:method="DELETE"
-                      th:action="@{/fkti/groups/list/course/{id}/{course}/{year}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()})}">
-                    <input type="submit" value="Delete"/></form>
-            </td>
-            <td>
-                <a th:href="@{/fkti/groups/list/course/{id}/{course}/{year}/{idTeacher}(id=${id},course=${teacher.getNameCourse()},year=${teacher.getYearsStudy()},idTeacher=${teacher.getId()})}"
-                   class="button">Edit
-                </a>
-            </td>
         </tr>
     </div>
 </table>
 <br/>
 <hr/>
 
-<a th:href="@{/fkti/groups/list/course/{id}/new(id=${id})}" class="button">Create new course</a>
 <br/>
 
 <a th:href="@{/fkti/groups}" class="button"> General page </a>
