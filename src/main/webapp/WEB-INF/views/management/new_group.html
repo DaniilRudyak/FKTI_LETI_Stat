@@ -9,39 +9,38 @@
             background-size: 620px 270px;
             background-position:  300px 260px ;
             background-repeat: no-repeat;
-    }</style>
+    }
+        .button {
+            background-color: #dfdddf;
+            color: black;
+            padding: 4px 13px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius:6px;
+            border:thin black;
+        }
+        {
+            box-sizing: border-box
+        ;
+        }
+
+
+        textarea {
+            width: 100%;
+            resize: vertical;
+            padding: 15px;
+            border-radius: 15px;
+            border: 0;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
+            height: 150px;
+        }
+    </style>
 </head>
 <body>
-<style>
-    .button {
-        background-color: #dfdddf;
-        color: black;
-        padding: 4px 13px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius:6px;
-        border:thin black;
-    }
-    {
-        box-sizing: border-box
-    ;
-    }
-
-
-    textarea {
-        width: 100%;
-        resize: vertical;
-        padding: 15px;
-        border-radius: 15px;
-        border: 0;
-        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.06);
-        height: 150px;
-    }
-</style>
 
 <form th:method="POST" th:action="@{/fkti/groups}" th:object="${group}">
     <label for="numberGroup">Enter number group: </label>
