@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/")
-public class TemplateController {
+public class AuthController {
 
     @GetMapping("login")
     public String getLogin(){
@@ -22,7 +22,7 @@ public class TemplateController {
     @Autowired
     private ApplicationUserService applicationUserService;
 
-    public TemplateController(ApplicationUserDaoImpl applicationUserDaoImpl) {
+    public AuthController(ApplicationUserDaoImpl applicationUserDaoImpl) {
         this.applicationUserDaoImpl = applicationUserDaoImpl;
     }
 
