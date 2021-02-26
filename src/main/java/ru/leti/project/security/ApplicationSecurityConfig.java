@@ -19,7 +19,6 @@ import ru.leti.project.auth.ApplicationUserService;
 import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
 
-import static ru.leti.project.security.ApplicationUserRole.*;
 
 
 @Configuration
@@ -31,24 +30,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private final ApplicationUserService applicationUserService;
 
     @Autowired
-    public ApplicationSecurityConfig(//PasswordEncoder passwordEncoder,
-                                     ApplicationUserService applicationUserService) {
-       // this.passwordEncoder = passwordEncoder;
+    public ApplicationSecurityConfig(ApplicationUserService applicationUserService) {
         this.applicationUserService = applicationUserService;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//                .and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/","index","/css/*","/js/*","/registration").permitAll()
-//                .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
-//                .antMatchers(HttpMethod.POST,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
-//                .antMatchers(HttpMethod.PUT,"/management/api/**").hasAuthority(COURSE_WRITE.getPermission())
-//                .antMatchers(HttpMethod.GET,"/management/api/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
                 .anyRequest()
                 .authenticated()
                 .and()
