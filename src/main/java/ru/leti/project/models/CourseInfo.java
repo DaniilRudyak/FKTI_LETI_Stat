@@ -38,6 +38,8 @@ public class CourseInfo {
     @Size(min = 10, max = 40, message = "Teacher's name should be between 10 and 40 characters")
     private String nameTeacher;
 
+    private String commentary;
+
     public CourseInfo() {
     }
 

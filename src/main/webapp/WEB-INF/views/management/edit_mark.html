@@ -45,6 +45,11 @@
     <label for="mark">Enter mark: </label>
     <input type="text" th:field="*{mark}" id="mark"/>
     <div style="color:red" th:if="${#fields.hasErrors('mark')}" th:errors="*{mark}"></div>
+
+    <br/>
+    <label for="commentary"> Enter commentary:</label>
+    <input type="text" th:field="*{commentary}" id="commentary"/>
+
     <br/>
     <input type="submit" value="Update!"/>
 </form>

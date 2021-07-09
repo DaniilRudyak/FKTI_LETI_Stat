@@ -66,8 +66,9 @@
         <th>Name course</th>
         <th>Year of certification</th>
         <th>Name teacher</th>
-        <th>mark</th>
-        <th>Change marks</th>
+        <th>Mark</th>
+        <th>Commentary</th>
+        <th>Edit</th>
     </tr>
     <div th:each="mark : ${marks}">
         <tr>
@@ -77,6 +78,7 @@
             <td><a th:text="${mark.getYearOfCertification()}"> year Of Certification</a></td>
             <td><a th:text="${mark.getNameTeacher()}">name teacher</a></td>
             <td><a th:text="${mark.getMark()}">mark</a></td>
+            <td><a th:text="${mark.getCommentary()}">commentary</a> </td>
             <td>
                 <a th:href="@{/fkti/groups/list/course/mark/{id}/{course}/{year}/edit/{number}(id=${id},course=${mark.getNameCourse()},year=${mark.getYearOfCertification()},number=${mark.getNumberStudentCard()})}">Edit</a>
             </td>

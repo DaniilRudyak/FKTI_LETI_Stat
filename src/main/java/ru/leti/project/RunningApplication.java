@@ -18,10 +18,5 @@ public class RunningApplication  {
     HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
     }
-//    @Override
-//    public void customize(ConfigurableServletWebServerFactory factory) {
-//        factory.addErrorPages(new ErrorPage(HttpStatus.FORBIDDEN, "/error/error_access.html"));
-//
-//    }
 
 }

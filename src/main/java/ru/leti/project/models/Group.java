@@ -1,13 +1,15 @@
 package ru.leti.project.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.sql.Date;
 
 @Data
-public class Group {
+public class  Group {
     private int id;
     @Min(value = 1000, message = "Group number should be only 4 characters")
     @Max(value = 9999, message = "Group number card should be only 4 characters")

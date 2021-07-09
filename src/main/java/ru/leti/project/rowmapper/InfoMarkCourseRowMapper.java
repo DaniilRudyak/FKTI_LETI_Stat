@@ -20,6 +20,7 @@ public class InfoMarkCourseRowMapper implements RowMapper<CourseInfo> {
         courseInfo.setYearOfCertification(resultSet.getDate("year_of_certification"));
         courseInfo.setNumberStudentCard(resultSet.getInt("number_student_card"));
         courseInfo.setMark(resultSet.getInt("mark"));
+        courseInfo.setCommentary(resultSet.getString("commentary"));
 
         return courseInfo;
     }
